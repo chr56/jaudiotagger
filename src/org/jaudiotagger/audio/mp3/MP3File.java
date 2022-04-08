@@ -36,9 +36,6 @@ import org.jaudiotagger.tag.reference.ID3V2Version;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -655,33 +652,38 @@ public class MP3File extends AudioFile
 		ID3v1Tag id1tag= getID3v1Tag();
 		id3v1TagSize  = id1tag.getSize();
 		}
-		
-		InputStream inStream = Files
-				.newInputStream(Paths.get(mp3File.getAbsolutePath()));
-		
-		byte[] buffer = new byte[bufferSize];
 
-		MessageDigest digest = MessageDigest.getInstance(algorithm);
+		FileInputStream inputStream = new FileInputStream(mp3File.getAbsolutePath());
+        MessageDigest digest = MessageDigest.getInstance(algorithm);
 
-		inStream.skip(startByte);
-		
-		int read;
-		long totalSize = mp3File.length() - startByte - id3v1TagSize;
-		int pointer  = buffer.length;
-		
-		while (pointer <= totalSize ) {
-			
-			read = inStream.read(buffer);
-			
-			digest.update(buffer, 0, read);
-			pointer += buffer.length;
-			}
-		read = inStream.read(buffer,0,(int)totalSize - pointer + buffer.length);
-		digest.update(buffer, 0, read);
-		
+		try{
+            byte[] buffer = new byte[bufferSize];
+
+
+            inputStream.skip(startByte);
+
+            int read;
+            long totalSize = mp3File.length() - startByte - id3v1TagSize;
+            int pointer  = buffer.length;
+
+            while (pointer <= totalSize ) {
+
+                read = inputStream.read(buffer);
+
+                digest.update(buffer, 0, read);
+                pointer += buffer.length;
+            }
+            read = inputStream.read(buffer,0,(int)totalSize - pointer + buffer.length);
+            digest.update(buffer, 0, read);
+        } catch (Exception ignore) {
+        } finally {
+		    inputStream.close();
+        }
+
+
 		byte[] hash = digest.digest();
 
-		
+
         return hash;
     }
 
@@ -858,14 +860,13 @@ public class MP3File extends AudioFile
      */
     public void precheck(File file) throws IOException
     {
-        Path path = file.toPath();
-        if (!Files.exists(path))
+        if (!file.exists())
         {
             logger.severe(ErrorMessage.GENERAL_WRITE_FAILED_BECAUSE_FILE_NOT_FOUND.getMsg(file.getName()));
             throw new IOException(ErrorMessage.GENERAL_WRITE_FAILED_BECAUSE_FILE_NOT_FOUND.getMsg(file.getName()));
         }
 
-        if (TagOptionSingleton.getInstance().isCheckIsWritable() && !Files.isWritable(path))
+        if (TagOptionSingleton.getInstance().isCheckIsWritable() && !file.canWrite())
         {
             logger.severe(ErrorMessage.GENERAL_WRITE_FAILED.getMsg(file.getName()));
             throw new IOException(ErrorMessage.GENERAL_WRITE_FAILED.getMsg(file.getName()));
