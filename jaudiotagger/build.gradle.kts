@@ -37,9 +37,9 @@ publishing {
             afterEvaluate {
                 from(components.getByName("java"))
             }
-            // groupId = ""
-            // artifactId = ""
-            // version = ""
+            groupId = "io.github.chr56.jaudiotagger"
+            artifactId = "jaudiotagger"
+            version = "0.0.2"
         }
     }
 }
