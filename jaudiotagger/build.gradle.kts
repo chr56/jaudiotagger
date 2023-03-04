@@ -11,7 +11,16 @@ java {
             java.srcDir("src")
         }
     }
+    withSourcesJar()
+    //withJavadocJar()
 }
+
+tasks.withType(JavaCompile::class.java) {
+    options.encoding = "UTF-8"
+}
+//tasks.withType(Javadoc::class.java) {
+//    options.encoding = "UTF-8"
+//}
 
 repositories {
     mavenCentral()
