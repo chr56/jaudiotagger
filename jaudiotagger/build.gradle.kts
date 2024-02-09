@@ -39,7 +39,7 @@ publishing {
             }
             groupId = "io.github.chr56.jaudiotagger"
             artifactId = "jaudiotagger"
-            version = "0.0.2"
+            version = "0.0.3"
         }
     }
 }
