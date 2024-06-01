@@ -48,7 +48,7 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "io.github.chr56"
             artifactId = "jaudiotagger"
-            version = "0.0.3"
+            version = "0.0.4"
 
             afterEvaluate {
                 from(components.getByName("java"))
