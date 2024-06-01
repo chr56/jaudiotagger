@@ -1,6 +1,9 @@
+import java.util.Properties
+
 plugins {
     java
     id("maven-publish")
+    id("signing")
 }
 
 java {
@@ -28,18 +31,74 @@ repositories {
 }
 
 dependencies {
-	implementation("com.squareup.okio:okio:1.17.3")
+    implementation("com.squareup.okio:okio:1.17.3")
     compileOnly("com.google.android:android:4.1.1.4")
 }
+
+val secretPropsFile = rootProject.file("secrets.properties")
+var secrets = Properties()
+if (secretPropsFile.exists()) {
+    secretPropsFile.inputStream().use {
+        secrets.load(it)
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>("release") {
+            groupId = "io.github.chr56"
+            artifactId = "jaudiotagger"
+            version = "0.0.3"
+
             afterEvaluate {
                 from(components.getByName("java"))
             }
-            groupId = "io.github.chr56.jaudiotagger"
-            artifactId = "jaudiotagger"
-            version = "0.0.3"
+
+            pom {
+                name.set("JAudioTagger")
+                description.set("Yet another fork of JAudioTagger of Kaned1as, which is a hard-fork of ijabs one")
+                url.set("https://github.com/chr56/jaudiotagger/")
+
+                licenses {
+                    license {
+                        name.set("LGPL-2.1")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("chr_56")
+                        name.set("chr56")
+                    }
+                }
+                scm {
+                    connection.set("https://github.com/chr56/jaudiotagger.git")
+                    developerConnection.set("https://github.com/chr56/jaudiotagger.git")
+                    url.set("https://github.com/chr56/jaudiotagger")
+                }
+            }
         }
+    }
+    repositories {
+        maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2") {
+            name = "MavenCentral"
+            if (secretPropsFile.exists()) {
+                credentials {
+                    username = secrets["sonatype_username"] as String
+                    password = secrets["sonatype_password"] as String
+                }
+            }
+        }
+    }
+}
+
+if (secretPropsFile.exists()) {
+    signing {
+        sign(publishing.publications)
+        val key = File(secrets["signing_file"] as String).readText()
+        useInMemoryPgpKeys(
+            secrets["signing_key"] as String,
+            key,
+            secrets["signing_password"] as String
+        )
     }
 }
