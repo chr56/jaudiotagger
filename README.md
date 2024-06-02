@@ -1,23 +1,20 @@
 Jaudiotagger
 ============
 
-**Note: This project is a fork of [Kaned1as one](https://github.com/Kaned1as/jaudiotagger/), which is a hard-fork of [ijabs one](https://bitbucket.org/ijabz/jaudiotagger), adding better support for mp4-dash and opus formats.
+**Note: This project is a fork of [Kaned1as one](https://github.com/Kaned1as/jaudiotagger/), which is a hard-fork of [ijabs one](https://bitbucket.org/ijabz/jaudiotagger), adding better support for mp4-dash and opus formats.**
 
 See original [README](https://github.com/Kaned1as/jaudiotagger/blob/master/README.md)
 
 Using
 -----
 
-Just add this as a Jitpack dependency:
+It is available on JitPack & Maven Central.
 
-```
-repositories {
-    maven { url "https://jitpack.io" }
-}
-
+``` kotlin
 dependencies {
-    implementation 'com.github.chr56:jaudiotagger:<version>'
-}
+    implementation("io.github.chr56:jaudiotagger:<version>")
+    // implementation("com.github.chr56:jaudiotagger:<version>") // jitpack
+}`
 ```
 
 Requirements
