@@ -1,20 +1,43 @@
 import java.util.Properties
 
 plugins {
-    java
+    alias(libs.plugins.androidGradlePluginLibrary)
     id("maven-publish")
     id("signing")
 }
 
-java {
-    targetCompatibility = JavaVersion.VERSION_1_8
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    withSourcesJar()
-    withJavadocJar()
+android {
+    namespace = "org.jaudiotagger"
+
+    compileSdk = 34
+    buildToolsVersion = "34.0.0"
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+        }
+    }
+
+    compileOptions {
+        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
+    buildFeatures {
+        buildConfig = false
+    }
 }
 
 tasks.withType(JavaCompile::class.java) {
     options.encoding = "UTF-8"
+    options.compilerArgs.add("-Xlint:deprecation")
 }
 tasks.withType(Javadoc::class.java) {
     options.encoding = "UTF-8"
@@ -27,7 +50,6 @@ repositories {
 
 dependencies {
     implementation("com.squareup.okio:okio:1.17.3")
-    compileOnly("com.google.android:android:4.1.1.4")
 }
 
 val secretPropsFile = rootProject.file("secrets.properties")
@@ -46,7 +68,7 @@ publishing {
             version = "0.0.4"
 
             afterEvaluate {
-                from(components.getByName("java"))
+                from(components["release"])
             }
 
             pom {
