@@ -16,34 +16,32 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'adopt'
           cache: gradle
 
-      - name: Build with Gradle
-        run: ./gradlew build --stacktrace
+      - name: Prepare Gradlew
+        run: ./gradlew
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: jaudiotagger
-          retention-days: 3
-          path: |
-            ./jaudiotagger/build/libs/jaudiotagger.jar
+      - name: Build with Gradle
+        run: ./gradlew assemble --stacktrace
+
+      - name: Publish to Maven Local
+        run: ./gradlew publishToMavenLocal --stacktrace
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: jaudiotagger-sources
+          name: jaudiotagger
           retention-days: 3
           path: |
-            ./jaudiotagger/build/libs/jaudiotagger-sources.jar
+            ~/.m2/repository/**
 
