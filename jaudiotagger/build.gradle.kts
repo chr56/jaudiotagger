@@ -49,7 +49,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.squareup.okio:okio:1.17.3")
+    implementation(libs.okio)
 }
 
 val secretPropsFile = rootProject.file("secrets.properties")
