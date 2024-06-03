@@ -1,6 +1,5 @@
 package org.jaudiotagger.tag.images;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
@@ -13,9 +12,9 @@ public interface ImageHandler {
 
     boolean isMimeTypeWritable(String mimeType);
 
-    byte[] writeImage(BufferedImage bi, String mimeType) throws IOException;
+    byte[] writeImage(Object bi, String mimeType) throws IOException;
 
-    byte[] writeImageAsPng(BufferedImage bi) throws IOException;
+    byte[] writeImageAsPng(Object bi) throws IOException;
 
     void showReadFormats();
 

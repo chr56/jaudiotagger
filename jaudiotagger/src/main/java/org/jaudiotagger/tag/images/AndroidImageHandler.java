@@ -1,8 +1,5 @@
 package org.jaudiotagger.tag.images;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 /**
  * Image Handling to to use when running on Android
  * <p>
@@ -53,7 +50,7 @@ public class AndroidImageHandler implements ImageHandler {
      * @param mimeType
      * @return
      */
-    public byte[] writeImage(BufferedImage bi, String mimeType) {
+    public byte[] writeImage(Object bi, String mimeType) {
         throw new UnsupportedOperationException();
     }
 
@@ -61,7 +58,7 @@ public class AndroidImageHandler implements ImageHandler {
      * @param bi
      * @return
      */
-    public byte[] writeImageAsPng(BufferedImage bi) {
+    public byte[] writeImageAsPng(Object bi) {
         throw new UnsupportedOperationException();
     }
 

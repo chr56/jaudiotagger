@@ -3,9 +3,6 @@ package org.jaudiotagger.tag.asf;
 import org.jaudiotagger.audio.asf.data.MetadataDescriptor;
 import org.jaudiotagger.tag.TagField;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
@@ -49,10 +46,9 @@ abstract class AbstractAsfTagImageField extends AsfTagField {
      * {@linkplain #getRawImageData() image content}.
      *
      * @return the image instance
-     * @throws IOException
      */
-    public BufferedImage getImage() throws IOException {
-        return ImageIO.read(new ByteArrayInputStream(getRawImageData()));
+    public Object getImage() throws IOException {
+        throw new UnsupportedOperationException("Not available on Android");
     }
 
     /**
