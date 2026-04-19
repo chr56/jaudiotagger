@@ -46,6 +46,7 @@ public class FrameBodyUnsupported extends AbstractID3v2FrameBody implements ID3v
     /**
      * @deprecated because no identifier set
      */
+    @Deprecated
     public FrameBodyUnsupported() {
 
     }
@@ -73,8 +74,9 @@ public class FrameBodyUnsupported extends AbstractID3v2FrameBody implements ID3v
      * Creates a new FrameBodyUnsupported datatype.
      *
      * @param value
-     * @deprecated because no identifier set
+     * @deprecated use {@link #FrameBodyUnsupported(String, byte[])} instead, since no identifier set
      */
+    @Deprecated
     public FrameBodyUnsupported(byte[] value) {
         setObjectValue(DataTypes.OBJ_DATA, value);
     }
