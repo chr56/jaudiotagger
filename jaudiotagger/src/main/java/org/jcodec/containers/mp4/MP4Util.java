@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class MP4Util {
 
-    private static final Logger LOGGER = Logger.getLogger(MP4Util.class.getCanonicalName());
+    private static final Logger LOGGER = Logger.getLogger("org.jcodec.containers.mp4");
     
     public static class Movie {
         private final FileTypeBox ftyp;

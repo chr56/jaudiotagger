@@ -42,7 +42,7 @@ import java.util.logging.Logger;
  * The default is that ID3 takes precedence if it exists
  */
 public class WavTag implements Tag, Id3SupportingTag {
-    private static final Logger logger = Logger.getLogger(WavTag.class.getPackage().getName());
+    private static final Logger logger = Logger.getLogger("org.jaudiotagger.tag.wav");
 
     private static final String NULL = "\0";
 

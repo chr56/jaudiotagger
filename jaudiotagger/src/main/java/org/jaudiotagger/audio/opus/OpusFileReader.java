@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class OpusFileReader extends AudioFileReader {
 
-    public static Logger logger = Logger.getLogger(OpusFileReader.class.getPackage().getName());
+    public static Logger logger = Logger.getLogger("org.jaudiotagger.audio.opus");
 
     private OpusInfoReader ir;
     private OpusVorbisTagReader vtr;

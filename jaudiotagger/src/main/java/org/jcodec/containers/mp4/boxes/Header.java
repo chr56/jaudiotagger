@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class Header {
 
-    private static final Logger LOGGER = Logger.getLogger(Header.class.getCanonicalName());
+    private static final Logger LOGGER = Logger.getLogger("org.jcodec.containers.mp4");
 
     public static final byte[] FOURCC_FREE = new byte[] {'f', 'r', 'e', 'e'};
     private static final long MAX_UNSIGNED_INT = 0x100000000L;

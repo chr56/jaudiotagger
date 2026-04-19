@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class DirectByteBufferUtils {
 
-    public static final Logger LOGGER = Logger.getLogger(DirectByteBufferUtils.class.getName());
+    public static final Logger LOGGER = Logger.getLogger("org.jaudiotagger.utils.DirectByteBuffer");
 
     private static ReleaseStrategy releaseStrategy;
 

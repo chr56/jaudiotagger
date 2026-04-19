@@ -29,7 +29,7 @@ import java.util.logging.Logger;
  */
 public class NodeBox extends Box {
 
-    private static final Logger LOGGER = Logger.getLogger(NodeBox.class.getCanonicalName());
+    private static final Logger LOGGER = Logger.getLogger("org.jcodec.containers.mp4");
 
     protected List<Box> boxes;
     protected IBoxFactory factory;
