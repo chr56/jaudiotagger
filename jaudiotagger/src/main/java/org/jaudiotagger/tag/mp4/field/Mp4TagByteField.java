@@ -79,20 +79,20 @@ public class Mp4TagByteField extends Mp4TagTextField {
         switch (realDataLength) {
             case 2: {
                 //Save as two bytes
-                Short shortValue = new Short(content);
+                short shortValue = Short.parseShort(content);
                 byte rawData[] = Utils.getSizeBEInt16(shortValue);
                 return rawData;
             }
             case 1: {
                 //Save as 1 bytes
-                Short shortValue = new Short(content);
+                short shortValue = Short.parseShort(content);
                 byte rawData[] = new byte[1];
-                rawData[0] = shortValue.byteValue();
+                rawData[0] = (byte) shortValue;
                 return rawData;
             }
             case 4: {
                 //Assume could be int
-                Integer intValue = new Integer(content);
+                Integer intValue = Integer.valueOf(content);
                 byte rawData[] = Utils.getSizeBEInt32(intValue);
                 return rawData;
             }

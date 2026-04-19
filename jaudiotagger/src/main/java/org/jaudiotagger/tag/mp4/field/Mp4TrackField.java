@@ -32,7 +32,7 @@ public class Mp4TrackField extends Mp4TagTextNumberField {
         super(Mp4FieldKey.TRACK.getFieldName(), trackValue);
 
         numbers = new ArrayList<>();
-        numbers.add(new Short("0"));
+        numbers.add((short) 0);
 
         String values[] = trackValue.split("/");
         switch (values.length) {
@@ -42,8 +42,8 @@ public class Mp4TrackField extends Mp4TagTextNumberField {
                 } catch (NumberFormatException nfe) {
                     throw new FieldDataInvalidException("Value of:" + values[0] + " is invalid for field:" + id);
                 }
-                numbers.add(new Short("0"));
-                numbers.add(new Short("0"));
+                numbers.add((short) 0);
+                numbers.add((short) 0);
                 break;
 
             case 2:
@@ -57,7 +57,7 @@ public class Mp4TrackField extends Mp4TagTextNumberField {
                 } catch (NumberFormatException nfe) {
                     throw new FieldDataInvalidException("Value of:" + values[1] + " is invalid for field:" + id);
                 }
-                numbers.add(new Short("0"));
+                numbers.add((short) 0);
                 break;
 
             default:
@@ -74,10 +74,10 @@ public class Mp4TrackField extends Mp4TagTextNumberField {
     public Mp4TrackField(int trackNo) {
         super(Mp4FieldKey.TRACK.getFieldName(), String.valueOf(trackNo));
         numbers = new ArrayList<>();
-        numbers.add(new Short("0"));
+        numbers.add((short) 0);
         numbers.add((short) trackNo);
-        numbers.add(new Short("0"));
-        numbers.add(new Short("0"));
+        numbers.add((short) 0);
+        numbers.add((short) 0);
     }
 
     public Mp4TrackField(byte[] data) {
@@ -105,10 +105,10 @@ public class Mp4TrackField extends Mp4TagTextNumberField {
     public Mp4TrackField(int trackNo, int total) {
         super(Mp4FieldKey.TRACK.getFieldName(), String.valueOf(trackNo));
         numbers = new ArrayList<>();
-        numbers.add(new Short("0"));
+        numbers.add((short) 0);
         numbers.add((short) trackNo);
         numbers.add((short) total);
-        numbers.add(new Short("0"));
+        numbers.add((short) 0);
     }
 
     /**
